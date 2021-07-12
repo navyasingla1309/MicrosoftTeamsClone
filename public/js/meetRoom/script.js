@@ -9,7 +9,9 @@ const viewVideo= document.createElement('video');
 let myuserid;
 
 
-
+document.querySelector('.end-call').addEventListener('click',()=>{
+  window.location.href ='/users';
+});
 
 document.querySelector('.viewchat').addEventListener('click',()=>{
   if(w<=700){
