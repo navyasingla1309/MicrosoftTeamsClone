@@ -1,0 +1,108 @@
+body{
+	background-image: url('https://media.istockphoto.com/photos/vignette-watercolor-texture-background-handpainted-aqua-brush-strokes-picture-id1207792106?k=6&m=1207792106&s=612x612&w=0&h=gkHaF10p3MQSZOmJWplUYP8XDmK8SthbXj2RBAePUjc=');
+
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	/*background-color: #b1e7e7;*/
+}
+ul{
+	height: 500px;
+	overflow: scroll;
+}
+
+.container{
+	width:70%;
+	margin-top: 5%;
+}
+.chats{
+	background-color: white;
+	
+}
+li{
+	align-self: right;
+	margin-bottom:3%;
+	padding:0 3%;
+	border-radius: 25px;
+}
+.me{
+	background-color:#d7e0f4;
+	margin-left:30%;
+}
+.other{
+	margin-right: 30%;
+	background-color: #5acccc;
+}
+.selected-group{
+	border-left: 5px solid #4771cb;
+	background-color:white;
+	
+}
+.selected-group h4{
+	font-weight: bold;
+}
+.my---groups{
+	background-color: rgba(255,255,255,0.5);
+	padding-left: 0px;
+	border-top: 5px solid #5acccc;
+	
+}
+hr{
+	margin-top: 0;
+	margin-bottom: 0;
+	background-color: white;
+	color:white;
+}
+h4{
+	margin-bottom: 0px;
+	font-size:16px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+.grp{
+	padding: 10px;
+}
+.create{
+	margin-top: 20px;
+}
+.chat-header{
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+input{
+	margin-bottom: 15px;
+	
+}
+h3{
+	text-align: center;
+	text-transform: uppercase;
+}
+.btn-info{
+	background-color: #4771cb;
+	border-color:  #4771cb;
+	color: white;
+}
+.btn-info:hover{
+	background-color: #2d519f;
+	border-color: #2d519f;
+	color: white;
+}
+.members{
+	background-color: #d7e0f4;
+	border-top: 5px solid #4771cb;
+}
+.bb-underline{
+	border-top: 6px solid #4771cb;
+	margin-left: 35%;
+	margin-right: 35%;
+}
+
+@media (max-width: 700px){
+	.container{
+		width: 100%;
+	}
+
+}
