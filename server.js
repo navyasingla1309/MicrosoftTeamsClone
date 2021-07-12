@@ -73,6 +73,7 @@ function userJoin(id, username, room) {
 }
 
 function userLeave(id) {
+	
   const index = users.findIndex(user => user.id === id);
   if (index !== -1) {
     return users.splice(index, 1)[0];
@@ -93,6 +94,15 @@ io.on("connection", (socket) => {
 		      room: nuser.room,
 		      users: getRoomUsers(nuser.room)
 	    });
+
+	   socket.on("disconnect", () => {
+	      const user = userLeave(userId);
+	      socket.to(roomId).emit("user-disconnected", userId);
+	      io.to(user.room).emit("roomUsers", {
+			      room: user.room,
+			      users: getRoomUsers(user.room)
+		    });
+    });
 	   
 	    socket.on("drawing", data => socket.to(roomId).emit("drawing", data));
 
