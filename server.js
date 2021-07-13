@@ -251,7 +251,11 @@ let videoCall= (req,res)=>{
 	 	res.render('room.ejs',{roomid: room, username, groupid:room});
   	}
 }
-
+let logout = (req,res)=>{
+	req.logout();
+	req.flash('success', 'logged out')
+	res.redirect('/login');
+}
 //ROUTES
 app.get('/',landing);
 app.get('/room/:groupid',isLoggedIn,startMeeting);
@@ -261,6 +265,7 @@ app.get('/login',loginPg)
 app.get('/register',registerPg)
 app.post('/login',passport.authenticate('local',{failureFlash:'Invalid username or password', failureRedirect:'/login'}),handleLogin);
 app.post('/register',handleRegister);
+app.get('/logout',logout);
 app.get('/:room',isLoggedIn,videoCall);
 
 
