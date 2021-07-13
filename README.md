@@ -21,24 +21,36 @@ For working prototype, visit https://tranquil-wave-13111.herokuapp.com/
 3. Audio toggle (MUTE/UNMUTE)
 4. View Participants
 5. Chat in video-call 
+
     5.1 messages can later be accessed within the group
-7. Screen-share
-8. Collaborative Whiteboard
-    8.1 Draw on whiteboard using touch/mouse
-    8.2 Changes transmitted to entire meeting in real-time
-    8.3 Change brush color or use eraser
-9. Meeting Notes
-    9.1 Notes shared to entire meeting on every keypress.
-    9.2 Make text Bold/Italic/Underline
-    9.3 Change font-color
-    9.4 change text-alignment
-11. End meeting option
+6. Screen-share
+7. Collaborative Whiteboard
+    
+    7.1 Draw on whiteboard using touch/mouse
+    
+    7.2 Changes transmitted to entire meeting in real-time
+    
+    7.3 Change brush color or use eraser
+8. Meeting Notes
+
+    8.1 Notes shared to entire meeting on every keypress.
+    
+    8.2 Make text Bold/Italic/Underline
+    
+    8.3 Change font-color
+    
+    8.4 change text-alignment
+9. End meeting option
 
 # Technology Stack
 Backend - NodeJs, ExpressJS, PassportJs
+
 Frontend - EJS, Bootstrap
+
 Database - MongoDB
+
 Socket.io
+
 peer.js
 
 # Video Demo:
