@@ -37,7 +37,6 @@ app.use(express.static("public"));
 	}
 }
 
-
 const  User = require("./models/userschema");
 app.use(session(sessionConfig));
 app.use(flash());
@@ -49,7 +48,6 @@ passport.serializeUser(User.serializeUser());
 //handling logout
 passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
-	//console.log(req.session);
 	res.locals.currUser= req.user;
 	res.locals.success=  req.flash('success');
 	res.locals.error= req.flash('error');
@@ -60,83 +58,86 @@ const  url  = process.env.DB_URL;
 const  connect  =  mongoose.connect(url, { useNewUrlParser: true  });
 const  Chat  = require("./models/chatschema");
 const  Group = require("./models/groupschema");
-const  Task = require("./models/taskschema");
 
 app.use(express.urlencoded({extended:true}));
 app.set('views',path.join(__dirname,'views'));
 const users = [];
 
+//function to add a user to a list of meeting participants (users)
 function userJoin(id, username, room) {
   const user = { id, username, room };
   users.push(user);
   return user;
 }
 
-function userLeave(id) {
-	
+//function to remove a user from list of participants
+function userLeave(id) {	
   const index = users.findIndex(user => user.id === id);
   if (index !== -1) {
     return users.splice(index, 1)[0];
   }
 }
-
+//getting all users in a particular room
 function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
 
+//curr: stores chat info of current user
 let curr=[];
+//grpname: stores the name of selected group
 let grpname;
 io.on("connection", (socket) => {
-  	socket.on("join-room", (roomId, userId, userName) => {
-	    socket.join(roomId);
-	    const nuser = userJoin(userId, userName, roomId);
-	    io.to(nuser.room).emit('roomUsers', {
-		      room: nuser.room,
-		      users: getRoomUsers(nuser.room)
-	    });
-
-	   socket.on("disconnect", () => {
+  socket.on("join-room", (roomId, userId, userName) => {
+  	socket.join(roomId);
+	//add the new user to users and send room users to client
+	const nuser = userJoin(userId, userName, roomId);
+	io.to(nuser.room).emit('roomUsers', {
+		room: nuser.room,
+		users: getRoomUsers(nuser.room)
+	});
+	socket.to(roomId).emit("user-connected", userId);
+	//remove the user and send the updated list of participants to client
+	socket.on("disconnect", () => {
 	      const user = userLeave(userId);
 	      socket.to(roomId).emit("user-disconnected", userId);
 	      io.to(user.room).emit("roomUsers", {
-			      room: user.room,
-			      users: getRoomUsers(user.room)
-		    });
-    });
-	   
-	    socket.on("drawing", data => socket.to(roomId).emit("drawing", data));
-
-	    socket.to(roomId).emit("user-connected", userId);
-	    
-	    socket.on("message", (message) => {
-
+	      	   room: user.room,
+		   users: getRoomUsers(user.room)
+	      });
+    	});
+	//recieve drawing event on whiteboard  
+	socket.on("drawing", data => socket.to(roomId).emit("drawing", data));
+	
+	  //message is created in meeting
+	socket.on("message", (message) => {
 	    io.to(roomId).emit("createMessage", message, userName);
-	       connect.then(db  =>  {
-			    let  chatMessage  =  new Chat({ message: message, sender:userName, groupid: roomId});
-			   chatMessage.save();
-			});
+	    //save the message into database with groupid as roomId
+	    //as a particular chat-group will always have same meeting Id
+	    connect.then(db  =>  {
+		   let  chatMessage  =  new Chat({ message: message, sender:userName, groupid: roomId});
+		   chatMessage.save();
 	    });
-
-	     socket.on('taking-notes',(text)=>{
+	});
+	
+	//When user is typing on notes, emit the recieved text to all users in the meeting room
+	socket.on('taking-notes',(text)=>{
 	    	socket.to(roomId).emit("copy-notes",text);
-	    });     
+	});     
   });
 
 
 
-
-
+   //message created outside the meeting in grup chat
    socket.on("chat message", function(msg, userName, groupid) {
    		socket.join(groupid);
 		io.to(groupid).emit("received", { message: msg , sender:userName});
 	 	connect.then(db  =>  {
-	    console.log("connected correctly to the server");
-	    let  chatMessage  =  new Chat({ message: msg, sender:userName, groupid: groupid});
-	   	chatMessage.save();
+	    		let  chatMessage  =  new Chat({ message: msg, sender:userName, groupid: groupid});
+	   		chatMessage.save();
 		});
 	});
 
-
+   //on selecting a particular group, set grpname to that group and redirect to /users.
    socket.on("select",function(groupid){
    		console.log("selecting");
    		grpname=groupid;
@@ -144,14 +145,17 @@ io.on("connection", (socket) => {
    		var destination = '/users';
 		socket.emit('redirect', destination,groupid);
    });
-
+	
+    //creating a new group
    socket.on('create-group', async (group, created_by)=>{
    		connect.then(async (db)  =>  {
-		    console.log("connected  to the server");
-		    let groupname= group+"---"+uuidv4();
-		    socket.join(groupname);
-		    let  grp  =  new Group({ name: groupname, created_by:created_by});
-		    grp.members.push(created_by);
+		    	console.log("connected  to the server");
+		    	//suffix entered group name with a unique ID, so that groups with same entered name have separate meeting links
+		    	let groupname= group+"---"+uuidv4();
+		    	socket.join(groupname);
+			//save group to both men=mbers of users and to groups collections. 
+		    	let  grp  =  new Group({ name: groupname, created_by:created_by});
+		    	grp.members.push(created_by);
 			grp.save();
 			let usergrp= await User.findOneAndUpdate({username:created_by},{$push:{groups:[groupname]}},{upsert: true});
 			let gps= await User.findOne({username: created_by});
@@ -159,6 +163,7 @@ io.on("connection", (socket) => {
 			socket.emit('user-group',groupname);
 		});
    });
+   //adding a new member to group
    socket.on('add-member', async (grp,member)=>{
    		connect.then(async (db)  =>  {
    			let usergrp= await User.findOneAndUpdate({username:member},{$push:{groups:[grp]}});
@@ -172,15 +177,12 @@ io.on("connection", (socket) => {
 
 
 let name="";
-
+//middleware to check if a user is authenticated
 const isLoggedIn= async (req,res,next)=>{
 	if(!req.isAuthenticated()){
-		
 		req.flash('error','You must be logged in');
 		return res.redirect('/login');
-
-	}
-	
+	}	
 	next();
 }
 
@@ -195,14 +197,16 @@ let redirectToChat=(req,res)=>{
 }
 
 let getChats= async(req,res)=>{
+	//load all chats of the user and save them to curr
 	const grps= await User.findOne({username:req.user.username});
+	//load members of the selected group;
  	const group= await Group.findOne({name: grpname});
  	let members=[];
  	if(group){
 		members= group.members;
 	}
-
-	if(req.user){
+	//redirect to the required group iff user is authenticated and a member of required group
+	if(req.user && members.includes(req.user)){
 		const username= req.user.username;
 		if(grps!=null){
 			let curr=[];
@@ -241,12 +245,14 @@ let handleRegister=async (req,res)=>{
 	res.redirect('/login')
 }
 let videoCall= (req,res)=>{
-  let room= req.params.room;
+  	let room= req.params.room;
   	if(req.user){
-	 	const username= req.user.username;
-		res.render('room.ejs',{roomid: room, username, groupid:room});
-	}
+		const username= req.user.username;
+	 	res.render('room.ejs',{roomid: room, username, groupid:room});
+  	}
 }
+
+//ROUTES
 app.get('/',landing);
 app.get('/room/:groupid',isLoggedIn,startMeeting);
 app.post('/users',isLoggedIn,redirectToChat);
