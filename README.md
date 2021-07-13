@@ -9,6 +9,7 @@ For working prototype, visit https://tranquil-wave-13111.herokuapp.com/
 # Authentication
 1. Register for new users
 2. Login for Existing users
+3. Logout from account
 
 # Chats
 1. Create a Chat-group
