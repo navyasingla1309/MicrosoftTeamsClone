@@ -48,6 +48,40 @@ MongoDB
 
 ###### Other  Libraries
 Peer.js
+# Screenshots
+###### Landing page:
+![image](https://user-images.githubusercontent.com/80400920/125484217-0d43cebe-04fd-4963-bee4-9ac49b4fd65d.png)
+###### Login page
+![image](https://user-images.githubusercontent.com/80400920/125484336-33d10d88-4cf2-41a1-9b79-aa5e32e3a0fa.png)
+###### Register page
+![image](https://user-images.githubusercontent.com/80400920/125484399-d38d93a6-c1a7-4137-926d-1327756e5e64.png)
+###### User Conversations
+![image](https://user-images.githubusercontent.com/80400920/125484533-3b8326f9-2955-4be2-9baf-bfb04ff691ee.png)
+###### View existing groups and create new groups
+![image](https://user-images.githubusercontent.com/80400920/125484689-60112b71-d350-45e3-8489-9f11e8b5db8f.png)
+###### Add members to groups, start video call and leave group
+![image](https://user-images.githubusercontent.com/80400920/125484796-620f0383-e89d-4f8b-9839-065d57b876e7.png)
+###### View All members in group
+![image](https://user-images.githubusercontent.com/80400920/125484873-611059ec-fd09-4cfb-89a4-a62040aecc0c.png)
+###### Scroll through previous conversation and send new messages
+![image](https://user-images.githubusercontent.com/80400920/125485034-1b755637-a74b-4972-9787-987d919ba4cf.png)
+###### Start Meeting with group on clicking start call
+![image](https://user-images.githubusercontent.com/80400920/125485318-26c9a528-feac-4fd8-9b87-2ada409cf3e4.png)
+###### Toggle Video
+![image](https://user-images.githubusercontent.com/80400920/125489299-2599af0a-d28f-441d-aae2-9ae49457fc32.png)
+###### Toggle Audio
+![image](https://user-images.githubusercontent.com/80400920/125489429-5f8acc6a-0e3e-4574-bca5-c90b5149790c.png)
+###### View Meeting Participants
+![image](https://user-images.githubusercontent.com/80400920/125489570-0a860bde-1f11-4905-a985-69985d11ce5f.png)
+###### Chat in the meeting
+![image](https://user-images.githubusercontent.com/80400920/125489721-16c24faf-d644-4cda-a2e2-fbf6bfa068db.png)
+###### Share screen
+![image](https://user-images.githubusercontent.com/80400920/125489815-e9dab11e-d7c5-4692-bc07-444353ceb52c.png)
+![image](https://user-images.githubusercontent.com/80400920/125489879-187279e2-c09c-4013-b87d-ecd679d38380.png)
+###### Use Whiteboard With Real-time transmission of changes to all meeting participants:
+![image](https://user-images.githubusercontent.com/80400920/125490423-c09b09fd-8293-40c0-9dc1-390892ef5556.png)
+
+
 # Video Demo:
 https://vimeo.com/573858508
 # Agile Methodology presentation:
