@@ -48,6 +48,9 @@
 						<h5 style="display: inline;"><%=grpname?grpname.substring(0,i):""%></h5>
 						<button class="btn btn-info rounded-pill add <%=grpname%>">+</button>
 						<button class="btn btn-info rounded-pill call <%=grpname%>">Start call</button>
+						<span style="margin-left:20%;">
+						<button class="btn btn-danger leave <%=grpname%>">Leave Group</button>
+						</span>
 					</div>
 			<%}%>
 			<hr style="color: black; background-color: black; margin-bottom: 20px;">
@@ -82,11 +85,12 @@
 
 	<div class="col-lg-3 members">
 		<h3 style>Members</h3>
-		<div class="bb-underline">
+		<div class="bb-underline"></div>
 			<%for(let member of members){%>
-				<p><i class="fas fa-user-alt fa-2x"></i>    <%=member%></p>
+				<div class="member"><%=member%></div>
 			<%}%>
-		</div>
+			<hr>
+		
 	</div>
 
 </div>
