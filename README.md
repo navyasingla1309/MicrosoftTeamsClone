@@ -40,6 +40,8 @@ For working prototype, visit https://tranquil-wave-13111.herokuapp.com/
     8.3 Change font-color
     
     8.4 change text-alignment
+
+    8.5 Download Notes
 9. End meeting option
 
 # Technology Stack
