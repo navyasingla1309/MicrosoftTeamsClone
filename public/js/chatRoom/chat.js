@@ -74,3 +74,8 @@ $(".add").on('click',(e)=>{
 		socket.emit('add-member',grp,nm);
 	}
 });
+$(".leave").on('click',(e)=>{
+  	let grp= e.currentTarget.classList[3];
+  	socket.emit("leave-group",grp,username);
+
+});
