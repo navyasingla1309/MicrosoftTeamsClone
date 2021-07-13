@@ -93,11 +93,14 @@ h3{
 .members{
 	background-color: #d7e0f4;
 	border-top: 5px solid #4771cb;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 .bb-underline{
 	border-top: 6px solid #4771cb;
 	margin-left: 35%;
 	margin-right: 35%;
+	margin-bottom: 20px;
 }
 
 @media (max-width: 700px){
@@ -105,4 +108,13 @@ h3{
 		width: 100%;
 	}
 
+}
+.member{
+	text-align: center;
+	font-weight: 600;
+	width: 100%; 
+	background-color: white;
+	border-bottom:1px solid #4771cb;
+	padding: 2px;
+	text-transform: capitalize;
 }
