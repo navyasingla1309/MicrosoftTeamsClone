@@ -171,6 +171,12 @@ io.on("connection", (socket) => {
   			
    		});
    })
+   socket.on('leave-group',async (grp, userName)=>{
+   		connect.then(async (db)=>{
+   			await User.findOneAndUpdate({username:userName},{$pull:{groups:grp}});
+   			await Group.findOneAndUpdate({name:grp},{$pull:{members:userName}});
+   		});
+   });
 });
 
 
