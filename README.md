@@ -5,18 +5,18 @@ Through this platform, different users can connect with each other via video cal
 
 For working prototype, visit https://tranquil-wave-13111.herokuapp.com/
 
-## Features
-# Authentication
+# Features
+### Authentication
 1. Register for new users
 2. Login for Existing users
 3. Logout from account
 
-# Chats
+### Chats
 1. Create a Chat-group
 2. Add Members to groups
 3. Start calls with groups
 
-# Video Call-
+### Video Call-
 1. Start video call with a group
 2. Video toggle (ON/OFF)
 3. Audio toggle (MUTE/UNMUTE)
@@ -45,7 +45,7 @@ For working prototype, visit https://tranquil-wave-13111.herokuapp.com/
     8.5 Download Notes
 9. End meeting option
 
-# Technology Stack
+### Technology Stack
 Backend - NodeJs, ExpressJS, PassportJs
 
 Frontend - EJS, Bootstrap
@@ -56,8 +56,8 @@ Socket.io
 
 peer.js
 
-# Video Demo:
+### Video Demo:
 https://vimeo.com/573858508
-# Agile Methodology presentation:
+### Agile Methodology presentation:
 https://docs.google.com/presentation/d/1CZr12sPOvNUCB8lnNpaY57yviYknzmDml8DH8nbDK1Y/edit?usp=sharing
 
