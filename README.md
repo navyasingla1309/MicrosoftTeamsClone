@@ -80,7 +80,16 @@ Peer.js
 ![image](https://user-images.githubusercontent.com/80400920/125489879-187279e2-c09c-4013-b87d-ecd679d38380.png)
 ###### Use Whiteboard With Real-time transmission of changes to all meeting participants:
 ![image](https://user-images.githubusercontent.com/80400920/125490423-c09b09fd-8293-40c0-9dc1-390892ef5556.png)
-
+###### Change Brush Color and erase in Whiteboard
+![image](https://user-images.githubusercontent.com/80400920/125490716-a0092abf-a3ae-42c6-8b18-1004bcc7f6e9.png)
+###### Meeting Notes:
+![image](https://user-images.githubusercontent.com/80400920/125490782-0a870768-7744-435e-832c-db0c44249a9c.png)
+###### Notes copied to entire meeting
+![image](https://user-images.githubusercontent.com/80400920/125491107-5e3420f6-96f5-45a2-ae4b-9460389f5026.png)
+###### Change Font properties and alignment
+![image](https://user-images.githubusercontent.com/80400920/125491273-09cea900-d3cf-4fcb-bf3c-98461441f35a.png)
+###### Meeting messages saved to group chat
+![image](https://user-images.githubusercontent.com/80400920/125491413-40dc4a0e-a1b5-44ed-932f-92d736e54ec1.png)
 
 # Video Demo:
 https://vimeo.com/573858508
