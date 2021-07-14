@@ -36,10 +36,22 @@ $('.create').submit(function(e){
 //starting video call with the group
 $(".call").on("click",(e)=>{
 	let grp= e.currentTarget.classList[4];
+	socket.emit('starting-call',grp,username);
 	window.location.href =`/room/${grp}`;
 
 })
+socket.on("incoming-call",(caller)=>{
+  	console.log("calling...");
+  	document.querySelector(".modal").style.display="block";
+});
+ $(".answer").on("click",(e)=>{
+    	let grp= e.currentTarget.classList[4];
+    	window.location.href =`/room/${grp}`;
+ });
 
+ $(".decline").on("click",(e)=>{
+    	window.location.href =`/users`;
+ });
 //selecting a group from grouplist
 $("h4").on("click",(e)=>{
 	$(".chat-title").innerHTML= `${e.currentTarget.innerHTML}`;
