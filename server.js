@@ -177,6 +177,10 @@ io.on("connection", (socket) => {
    			await Group.findOneAndUpdate({name:grp},{$pull:{members:userName}});
    		});
    });
+   socket.on('starting-call', (grp,username)=>{
+   		io.to(grp).emit("incoming-call",{caller: username});
+   });
+});
 });
 
 
