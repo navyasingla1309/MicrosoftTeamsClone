@@ -53,6 +53,17 @@
 						</span>
 					</div>
 			<%}%>
+			<div id="myModal" class="modal">
+
+			  <!-- Modal content -->
+				  <div class="modal-content">
+					    <h2 class="text-center">INCOMING CALL</h2>
+							    <button class="btn btn-success rounded-pill answer <%=grpname%>" style="margin-bottom: 20px;">Answer</button>						
+							    <button class="btn btn-danger rounded-pill decline <%=grpname%>">Decline</button>
+							
+					    </div>
+				  </div>
+			</div>
 			<hr style="color: black; background-color: black; margin-bottom: 20px;">
     		<ul id="messages"  class="messages">
 		    	<%for(let g of grps){%>
