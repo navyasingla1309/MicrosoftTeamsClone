@@ -34,7 +34,16 @@
 
 
 	<div class="col-lg-6 chats">
-		<div  class="chat_window">
+		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+		    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Chats</a>
+		    <a class="nav-item nav-link" id="nav-logs-tab" data-toggle="tab" href="#nav-logs" role="tab" aria-controls="nav-logs" aria-selected="false">Call-Logs</a>
+		   
+		  </div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+		  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+		  	<div  class="chat_window">
     		<div  class="top_menu">
     			<div  class="buttons">
     				<div  class="button close"></div>
@@ -58,12 +67,22 @@
 			  <!-- Modal content -->
 				  <div class="modal-content">
 					    <h2 class="text-center">INCOMING CALL</h2>
-							    <button class="btn btn-success rounded-pill answer <%=grpname%>" style="margin-bottom: 20px;">Answer</button>						
+					    
+							    <button class="btn btn-success rounded-pill answer <%=grpname%>" style="margin-bottom: 20px;">Answer</button>
+							
 							    <button class="btn btn-danger rounded-pill decline <%=grpname%>">Decline</button>
 							
 					    </div>
+
+
 				  </div>
+
+
+		
+
 			</div>
+
+
 			<hr style="color: black; background-color: black; margin-bottom: 20px;">
     		<ul id="messages"  class="messages">
 		    	<%for(let g of grps){%>
@@ -88,9 +107,25 @@
 				    </form>
 			    <%}%>
 			</div>
-		</div>
-	</div>
 
+
+		  	
+		  </div>
+		  <div class="tab-pane fade" id="nav-logs" role="tabpanel" aria-labelledby="nav-logs-tab">
+		  	<h3 class="logs">Call Logs</h3>
+		  	<hr>
+		  	<%for(let call of calls){%>
+		  		<h6><%=call%></h6>
+		  		<hr>
+		  	<%}%>
+		  </div>
+		  
+		</div>
+		
+
+
+		</div>
+	
 
 
 
