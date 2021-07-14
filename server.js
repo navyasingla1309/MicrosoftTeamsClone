@@ -179,7 +179,16 @@ io.on("connection", (socket) => {
    });
    socket.on('starting-call', (grp,username)=>{
    		io.to(grp).emit("incoming-call",{caller: username});
-   });
+	   	connect.then(async (db)=>{
+   			var today = new Date();
+   			var time = today+" "+today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+   			let newcall= await Call.findOneAndUpdate({group: grp},{$push:{start:[time]}},{upsert:true});
+   			
+   			console.log(newcall);
+   			await newcall.save();
+
+   		});
+   	});
 });
 });
 
@@ -206,17 +215,20 @@ let redirectToChat=(req,res)=>{
 	res.redirect('/users');
 }
 
-let getChats= async(req,res)=>{
-	//load all chats of the user and save them to curr
+let getData= async(req,res)=>{
 	const grps= await User.findOne({username:req.user.username});
-	//load members of the selected group;
  	const group= await Group.findOne({name: grpname});
+ 	const allcalls= await Call.findOne({group: grpname});
  	let members=[];
+ 	let calls=[];
  	if(group){
 		members= group.members;
 	}
-	//redirect to the required group iff user is authenticated and a member of required group
-	if(req.user && members.includes(req.user)){
+	if(allcalls){
+		calls= allcalls.start;
+		console.log(calls);
+	}
+	if(req.user){
 		const username= req.user.username;
 		if(grps!=null){
 			let curr=[];
@@ -225,12 +237,13 @@ let getChats= async(req,res)=>{
 				curr[g]= allmsgs;
 			}
 
-			res.render('home.ejs', {grps: grps.groups,username, chats:curr, grpname,members});
+			res.render('home.ejs', {grps: grps.groups,username, chats:curr, grpname,members,calls});
 		}else{
-			res.render('home.ejs',{grps:[],username, chats:[], grpname,members});
+			res.render('home.ejs',{grps:[],username, chats:[], grpname,members,calls});
 		}
 	}
 }
+
 
 let loginPg=(req,res)=>{
  	res.render('login.ejs');
@@ -270,7 +283,7 @@ let logout = (req,res)=>{
 app.get('/',landing);
 app.get('/room/:groupid',isLoggedIn,startMeeting);
 app.post('/users',isLoggedIn,redirectToChat);
-app.get('/users',isLoggedIn,getChats);
+app.get('/users',isLoggedIn,getData);
 app.get('/login',loginPg)
 app.get('/register',registerPg)
 app.post('/login',passport.authenticate('local',{failureFlash:'Invalid username or password', failureRedirect:'/login'}),handleLogin);
